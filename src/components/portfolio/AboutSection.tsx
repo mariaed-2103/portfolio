@@ -7,18 +7,18 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image/Avatar */}
           <div className="relative animate-fade-up">
-            <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary/30 to-accent/50 rounded-3xl p-8 flex items-center justify-center">
-              <div className="w-full h-full bg-muted rounded-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-primary/20 rounded-full flex items-center justify-center">
-                    <Code2 className="w-16 h-16 text-navy" />
+              <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary/30 to-accent/50 rounded-3xl p-8 flex items-center justify-center">
+                  <div className="w-full h-full bg-muted rounded-2xl overflow-hidden">
+                      <img
+                          src="/img_portfolio.jpg"
+                          alt="Foto de perfil"
+                          className="w-full h-full object-cover"
+                      />
                   </div>
-                  <p className="text-muted-foreground text-sm">Sua foto aqui</p>
-                </div>
               </div>
-            </div>
-            
-            {/* Floating badge */}
+
+
+              {/* Floating badge */}
             <div className="absolute -bottom-4 -right-4 md:right-8 bg-card p-4 rounded-xl shadow-lg border border-border animate-float">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
