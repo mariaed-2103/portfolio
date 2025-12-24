@@ -28,13 +28,17 @@ const ContactSection = () => {
                             <input type="hidden" name="_subject" value="Contato pelo Portfólio" />
                             <input type="hidden" name="_captcha" value="false" />
                             <input type="hidden" name="_template" value="table" />
+                            <input
+                                type="hidden"
+                                name="_next"
+                                value="https://seusite.com/#contato"
+                            />
 
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium mb-2 text-navy">
+                                <label className="block text-sm font-medium mb-2 text-navy">
                                     Nome
                                 </label>
                                 <Input
-                                    id="name"
                                     name="name"
                                     type="text"
                                     placeholder="Seu nome"
@@ -44,11 +48,10 @@ const ContactSection = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium mb-2 text-navy">
+                                <label className="block text-sm font-medium mb-2 text-navy">
                                     Email
                                 </label>
                                 <Input
-                                    id="email"
                                     name="email"
                                     type="email"
                                     placeholder="seu@email.com"
@@ -57,12 +60,14 @@ const ContactSection = () => {
                                 />
                             </div>
 
+                            {/* CAMPO OBRIGATÓRIO PARA O FORMSUBMIT */}
+                            <input type="hidden" name="_replyto" />
+
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium mb-2 text-navy">
+                                <label className="block text-sm font-medium mb-2 text-navy">
                                     Mensagem
                                 </label>
                                 <Textarea
-                                    id="message"
                                     name="message"
                                     placeholder="Escreva sua mensagem..."
                                     required
@@ -76,6 +81,7 @@ const ContactSection = () => {
                                 Enviar Mensagem
                             </Button>
                         </form>
+
                     </div>
 
                     {/* Contact Info */}
