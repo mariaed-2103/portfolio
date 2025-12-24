@@ -32,7 +32,7 @@ const projects: Project[] = [
     title: "TCC - Sistema Web Integrado",
     description: "Trabalho de Conclusão de Curso desenvolvendo sistema web integrando HTML, Java, PHP e PhpMyAdmin, com foco em usabilidade.",
     technologies: ["HTML", "Java", "PHP", "MySQL"],
-    githubUrl: "https://github.com/mariaed-2103",
+    githubUrl: "https://github.com/mariaed-2103/projetos-ensino-medio",
   },
 ];
 
