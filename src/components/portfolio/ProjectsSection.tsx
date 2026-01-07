@@ -16,18 +16,20 @@ const projects: Project[] = [
     technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
     githubUrl: "https://github.com/mariaed-2103",
   },
-  {
-    title: "Sistema Gestor - Páginas Internas",
-    description: "Desenvolvimento de páginas internas focadas em integração e usabilidade. Testes de documentos fiscais eletrônicos (DANFE, XML, TXT).",
-    technologies: ["Java", "Spring Boot", "React"],
-    githubUrl: "https://github.com/mariaed-2103",
-  },
-  {
-    title: "Sites e Landing Pages",
-    description: "Desenvolvimento de sites institucionais e landing pages responsivas em WordPress com personalização de temas e plugins.",
-    technologies: ["WordPress", "HTML", "CSS", "PHP"],
-    githubUrl: "https://github.com/mariaed-2103",
-  },
+    {
+        title: "Plataforma do Clube da Fábrica",
+        description:
+            "Projeto interdisciplinar desenvolvido na faculdade com foco em arquitetura full stack. Atuei no desenvolvimento de uma plataforma web utilizando Java Spring Boot no back-end e React no front-end, aplicando conceitos de APIs REST, componentização e integração entre camadas.",
+        technologies: ["Java", "Spring Boot", "React"],
+        githubUrl: "https://github.com/mariaed-2103",
+    },
+    {
+        title: "Kanban Web",
+        description:
+            "Aplicação de Kanban desenvolvida durante um curso de React para iniciantes, com foco em organização de tarefas e estados. O projeto reforçou conceitos fundamentais como componentes, estado, props e renderização condicional.",
+        technologies: ["React", "JavaScript", "HTML", "CSS"],
+        githubUrl: "https://github.com/mariaed-2103",
+    },
   {
     title: "TCC - Sistema Web Integrado",
     description: "Trabalho de Conclusão de Curso desenvolvendo sistema web integrando HTML, Java, PHP e PhpMyAdmin, com foco em usabilidade.",
