@@ -2,9 +2,9 @@
 
 import type React from "react"
 
-import { Button } from "app/components/ui/button"
-import { Input } from "app/components/ui/input"
-import { Textarea } from "app/components/ui/textarea"
+import { Button } from "@/components/ui/button.tsx"
+import { Input } from "@/components/ui/input.tsx"
+import { Textarea } from "@/components/ui/textarea.tsx"
 import { Github, Linkedin, Mail, Send, Phone } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
