@@ -31,7 +31,7 @@ export async function POST(request: Request) {
             },
             body: JSON.stringify({
                 from: "Portfolio <onboarding@resend.dev>", // Email verificado no Resend
-                to: "mariaedzinattoo@gmail.com", // Seu email
+                to: process.env.CONTACT_EMAIL!, // Seu email
                 reply_to: email, // Email de quem enviou
                 subject: `Novo contato de ${name}`,
                 html: `
