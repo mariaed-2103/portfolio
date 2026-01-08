@@ -4,25 +4,27 @@ export async function POST(request: Request) {
     try {
         const { name, email, message } = await request.json()
 
-        // Validação básica
+        // 1. Validação básica dos campos
         if (!name || !email || !message) {
             return NextResponse.json({ error: "Todos os campos são obrigatórios" }, { status: 400 })
         }
 
-        // Validação de email
+        // 2. Validação de formato de email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailRegex.test(email)) {
             return NextResponse.json({ error: "Email inválido" }, { status: 400 })
         }
 
-        // Usando Resend para enviar o email
+        // 3. Verificação das chaves de ambiente
         const RESEND_API_KEY = process.env.RESEND_API_KEY
+        const CONTACT_EMAIL = process.env.CONTACT_EMAIL
 
-        if (!RESEND_API_KEY) {
-            console.error("RESEND_API_KEY não configurada")
+        if (!RESEND_API_KEY || !CONTACT_EMAIL) {
+            console.error("Configuração de email ausente (.env.local)")
             return NextResponse.json({ error: "Serviço de email não configurado" }, { status: 500 })
         }
 
+        // 4. Envio para a API do Resend
         const response = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: {
@@ -30,10 +32,16 @@ export async function POST(request: Request) {
                 Authorization: `Bearer ${RESEND_API_KEY}`,
             },
             body: JSON.stringify({
-                from: "Portfolio <onboarding@resend.dev>", // Email verificado no Resend
-                to: process.env.CONTACT_EMAIL!, // Seu email
-                reply_to: email, // Email de quem enviou
-                subject: `Novo contato de ${name}`,
+                // O 'from' DEVE ser onboarding@resend.dev (para testes) ou um domínio verificado seu
+                from: "Portfolio <onboarding@resend.dev>",
+
+                // O 'to' deve ser o seu email verificado (definido no .env.local)
+                to: CONTACT_EMAIL,
+
+                // O 'reply_to' permite que você clique em "Responder" e vá direto para a pessoa
+                reply_to: email,
+
+                subject: `Novo contato de ${name} - Portfolio`,
                 html: `
           <!DOCTYPE html>
           <html>
@@ -104,7 +112,7 @@ export async function POST(request: Request) {
               </div>
               <div class="footer">
                 <p>Esta mensagem foi enviada através do formulário de contato do seu portfolio.</p>
-                <p>Você pode responder diretamente para o email: ${email}</p>
+                <p>Para responder, basta clicar em "Responder" no seu cliente de email.</p>
               </div>
             </body>
           </html>
@@ -112,15 +120,18 @@ export async function POST(request: Request) {
             }),
         })
 
+        // 5. Tratamento de erro da API do Resend
         if (!response.ok) {
             const error = await response.text()
-            console.error("Erro Resend:", error)
+            console.error("Erro Resend API:", error)
             return NextResponse.json({ error: "Erro ao enviar email" }, { status: 500 })
         }
 
+        // 6. Sucesso
         return NextResponse.json({ success: true, message: "Email enviado com sucesso!" }, { status: 200 })
+
     } catch (error) {
-        console.error("Erro no envio de email:", error)
+        console.error("Erro no servidor:", error)
         return NextResponse.json({ error: "Erro ao processar a requisição" }, { status: 500 })
     }
 }

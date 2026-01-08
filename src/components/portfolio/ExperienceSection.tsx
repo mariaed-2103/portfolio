@@ -11,7 +11,7 @@ interface TimelineItem {
 const timelineItems: TimelineItem[] = [
   {
     type: "experience",
-    title: "Desenvolvedor Full Stack (Freelance)",
+    title: "Desenvolvedora Full Stack (Freelance)",
     organization: "Analytics Polaris",
     period: "Outubro 2025 – Dezembro 2025",
     description: "Desenvolvimento de plataforma web utilizando Java, Spring Boot e React. Criação de APIs REST, integração front-end e back-end e construção de interfaces responsivas com Tailwind CSS.",
