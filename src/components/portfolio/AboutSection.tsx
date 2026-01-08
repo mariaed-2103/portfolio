@@ -10,7 +10,7 @@ const AboutSection = () => {
               <div className="aspect-square max-w-md mx-auto bg-gradient-to-br from-primary/30 to-accent/50 rounded-3xl p-8 flex items-center justify-center">
                   <div className="w-full h-full bg-muted rounded-2xl overflow-hidden">
                       <img
-                          src="/img_portfolio.jpg"
+                          src="/img_portfolio.jpeg"
                           alt="Foto de perfil"
                           className="w-full h-full object-cover"
                       />
