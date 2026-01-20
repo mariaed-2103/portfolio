@@ -60,6 +60,18 @@ const projects: Project[] = [
             },
         ],
     },
+    {
+        title: "Calculadora",
+        description:
+            "Aplicação de calculadora desenvolvida em React, com foco em componentização, estilização moderna em CSS e boas práticas de UI/UX.",
+        technologies: ["React", "CSS"],
+        codeLinks: [
+            {
+                label: "Ver Código",
+                url: "https://github.com/mariaed-2103/calculadora-react",
+            },
+        ],
+    },
 ]
 
 const ProjectsSection = () => {
