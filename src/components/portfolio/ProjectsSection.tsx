@@ -74,6 +74,19 @@ const projects: Project[] = [
             },
         ],
     },
+    {
+        title: "FitFoco",
+        description:
+            "Aplicativo mobile para registro e acompanhamento de treinos na academia, com interface reativa, gerenciamento de estado dinâmico e persistência de dados offline.",
+        technologies: ["Flutter", "Dart", "Firebase"],
+        codeLinks: [
+            {
+                label: "Ver Código",
+                url: "https://github.com/mariaed-2103/LP3-FocoFit",
+            },
+        ],
+    },
+
 ];
 
 const ProjectCard = ({ project }: { project: Project }) => (
