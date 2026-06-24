@@ -1,235 +1,232 @@
-import { Button } from "@/components/ui/button";
-import { Github, ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+import { Github } from "lucide-react";
+import { useState } from "react";
 
 interface CodeLink {
-    label: string;
-    url: string;
+  label: string;
+  url: string;
 }
 
 interface Project {
-    title: string;
-    description: string;
-    technologies: string[];
-    codeLinks?: CodeLink[];
+  title: string;
+  description: string;
+  technologies: string[];
+  codeLinks?: CodeLink[];
 }
 
 const projects: Project[] = [
-    {
-        title: "Plataforma Analytics Polaris",
-        description:
-            "Plataforma web completa desenvolvida com Java e Spring Boot no backend e React no frontend. APIs REST, integração full stack e interfaces responsivas.",
-        technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
-    },
-    {
-        title: "Plataforma do Clube da Fábrica",
-        description:
-            "Projeto interdisciplinar desenvolvido na faculdade com foco em arquitetura full stack. Atuei no desenvolvimento de uma plataforma web utilizando Java Spring Boot no back-end e React no front-end, aplicando conceitos de APIs REST, componentização e integração entre camadas.",
-        technologies: ["Java", "Spring Boot", "React"],
-        codeLinks: [
-            {
-                label: "Frontend",
-                url: "https://github.com/mariaed-2103/clubedafabrica2025",
-            },
-            {
-                label: "Backend",
-                url: "https://github.com/mariaed-2103/clubedafabricaBackend2025",
-            },
-        ],
-    },
-    {
-        title: "Kanban Web",
-        description:
-            "Aplicação de Kanban desenvolvida durante um curso de React para iniciantes, com foco em organização de tarefas e estados. O projeto reforçou conceitos fundamentais como componentes, estado, props e renderização condicional.",
-        technologies: ["React", "JavaScript", "HTML", "CSS"],
-        codeLinks: [
-            {
-                label: "Ver Código",
-                url: "https://github.com/mariaed-2103/Kanban-em-React-para-iniciantes",
-            },
-        ],
-    },
-    {
-        title: "TCC - Sistema Web Integrado",
-        description:
-            "Trabalho de Conclusão de Curso desenvolvendo sistema web integrando HTML, Java, PHP e PhpMyAdmin, com foco em usabilidade.",
-        technologies: ["HTML", "Java", "PHP", "PhpMyAdmin"],
-        codeLinks: [
-            {
-                label: "Ver Código",
-                url: "https://github.com/mariaed-2103/TCC-MindfulHarmony",
-            },
-        ],
-    },
-    {
-        title: "Calculadora",
-        description:
-            "Aplicação de calculadora desenvolvida em React, com foco em componentização, estilização moderna em CSS e boas práticas de UI/UX.",
-        technologies: ["React", "CSS"],
-        codeLinks: [
-            {
-                label: "Ver Código",
-                url: "https://github.com/mariaed-2103/calculadora-react",
-            },
-        ],
-    },
-    {
-        title: "FitFoco",
-        description:
-            "Aplicativo mobile para registro e acompanhamento de treinos na academia, com interface reativa, gerenciamento de estado dinâmico e persistência de dados offline.",
-        technologies: ["Flutter", "Dart", "Firebase"],
-        codeLinks: [
-            {
-                label: "Ver Código",
-                url: "https://github.com/mariaed-2103/LP3-FocoFit",
-            },
-        ],
-    },
-
+  {
+    title: "Plataforma Analytics Polaris",
+    description:
+      "Plataforma web completa com Java e Spring Boot no backend e React no frontend. APIs REST e interfaces responsivas.",
+    technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
+  },
+  {
+    title: "Plataforma Clube da Fábrica",
+    description:
+      "Projeto interdisciplinar full stack com Java Spring Boot e React, aplicando APIs REST e integração entre camadas.",
+    technologies: ["Java", "Spring Boot", "React"],
+    codeLinks: [
+      { label: "Frontend", url: "https://github.com/mariaed-2103/clubedafabrica2025" },
+      { label: "Backend", url: "https://github.com/mariaed-2103/clubedafabricaBackend2025" },
+    ],
+  },
+  {
+    title: "Kanban Web",
+    description:
+      "Aplicação Kanban em React focada em componentização, estado e renderização condicional.",
+    technologies: ["React", "JavaScript", "CSS"],
+    codeLinks: [
+      { label: "Código", url: "https://github.com/mariaed-2103/Kanban-em-React-para-iniciantes" },
+    ],
+  },
+  {
+    title: "TCC — Sistema Web Integrado",
+    description:
+      "Sistema web integrando HTML, Java, PHP e PhpMyAdmin com foco em usabilidade — MindfulHarmony.",
+    technologies: ["HTML", "Java", "PHP", "PhpMyAdmin"],
+    codeLinks: [
+      { label: "Código", url: "https://github.com/mariaed-2103/TCC-MindfulHarmony" },
+    ],
+  },
+  {
+    title: "Calculadora React",
+    description:
+      "Calculadora com foco em componentização e boas práticas de UI/UX em React.",
+    technologies: ["React", "CSS"],
+    codeLinks: [
+      { label: "Código", url: "https://github.com/mariaed-2103/calculadora-react" },
+    ],
+  },
+  {
+    title: "FitFoco",
+    description:
+      "App mobile para registro de treinos com interface reativa, gerenciamento de estado e persistência offline.",
+    technologies: ["Flutter", "Dart", "Firebase"],
+    codeLinks: [
+      { label: "Código", url: "https://github.com/mariaed-2103/LP3-FocoFit" },
+    ],
+  },
 ];
 
-const ProjectCard = ({ project }: { project: Project }) => (
-    <article className="group bg-card rounded-2xl p-6 border border-border card-hover flex flex-col h-full">
-        <div className="flex flex-col flex-1">
-            <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors text-navy">
-                {project.title}
-            </h3>
+const ProjectCard = ({ project }: { project: Project }) => {
+  const [hovered, setHovered] = useState(false);
 
-            <p className="text-muted-foreground mb-4 flex-1 leading-relaxed line-clamp-4">
-                {project.description}
-            </p>
+  return (
+    <article
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "#fff",
+        borderRadius: "1.25rem",
+        padding: "1.5rem",
+        border: "1.5px solid rgba(198,159,213,0.3)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.75rem",
+        transition: "transform 0.2s, box-shadow 0.2s",
+        transform: hovered ? "translateY(-4px)" : "none",
+        boxShadow: hovered ? "0 12px 32px rgba(198,159,213,0.25)" : "none",
+      }}
+    >
+      <h3
+        style={{
+          fontFamily: "'Playfair Display', serif",
+          fontStyle: "italic",
+          fontWeight: 700,
+          fontSize: "1rem",
+          lineHeight: 1.3,
+          color: "#1a1235",
+        }}
+      >
+        {project.title}
+      </h3>
 
-            <div className="flex flex-wrap gap-2 mb-6">
-                {project.technologies.map((tech) => (
-                    <span
-                        key={tech}
-                        className="px-3 py-1 text-xs font-medium bg-primary/20 text-navy rounded-full"
-                    >
+      <p
+        style={{
+          fontSize: "0.83rem",
+          color: "#6b5f7a",
+          flex: 1,
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+        }}
+      >
+        {project.description}
+      </p>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+        {project.technologies.map((tech) => (
+          <span
+            key={tech}
+            style={{
+              padding: "0.2rem 0.65rem",
+              background: "#e4cff0",
+              borderRadius: "100px",
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              color: "#1a1235",
+            }}
+          >
             {tech}
           </span>
-                ))}
-            </div>
+        ))}
+      </div>
 
-            <div className="flex gap-3 flex-wrap mt-auto">
-                {project.codeLinks &&
-                    project.codeLinks.map((link) => (
-                        <Button key={link.url} variant="outline" size="sm" asChild>
-                            <a href={link.url} target="_blank" rel="noopener noreferrer">
-                                <Github className="w-4 h-4 mr-2" />
-                                {link.label}
-                            </a>
-                        </Button>
-                    ))}
-            </div>
+      {project.codeLinks && (
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          {project.codeLinks.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.35rem",
+                fontSize: "0.78rem",
+                fontWeight: 700,
+                color: "#9b6ab5",
+                textDecoration: "none",
+                border: "1.5px solid #c69fd5",
+                borderRadius: "100px",
+                padding: "0.3rem 0.75rem",
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                el.style.background = "#9b6ab5";
+                el.style.borderColor = "#9b6ab5";
+                el.style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget;
+                el.style.background = "transparent";
+                el.style.borderColor = "#c69fd5";
+                el.style.color = "#9b6ab5";
+              }}
+            >
+              <Github size={12} />
+              ⇗ {link.label}
+            </a>
+          ))}
         </div>
+      )}
     </article>
-);
+  );
+};
 
 const ProjectsSection = () => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        align: "start",
-        loop: false,
-        skipSnaps: false,
-        slidesToScroll: 1,
-    });
+  return (
+    <section
+      id="projetos"
+      style={{ padding: "5rem 2rem", background: "#fdfdc9" }}
+    >
+      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <p
+          style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "0.75rem",
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "#9b6ab5",
+            marginBottom: "0.5rem",
+          }}
+        >
+          Portfólio
+        </p>
+        <h2
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontStyle: "italic",
+            fontWeight: 700,
+            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+            marginBottom: "3rem",
+            color: "#1a1235",
+            lineHeight: 1.2,
+          }}
+        >
+          Projetos
+        </h2>
 
-    const [canScrollPrev, setCanScrollPrev] = useState(false);
-    const [canScrollNext, setCanScrollNext] = useState(true);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+        <div className="projects-grid">
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
+        </div>
+      </div>
 
-    const scrollPrev = useCallback(() => {
-        if (emblaApi) emblaApi.scrollPrev();
-    }, [emblaApi]);
-
-    const scrollNext = useCallback(() => {
-        if (emblaApi) emblaApi.scrollNext();
-    }, [emblaApi]);
-
-    const onSelect = useCallback(() => {
-        if (!emblaApi) return;
-        setCanScrollPrev(emblaApi.canScrollPrev());
-        setCanScrollNext(emblaApi.canScrollNext());
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, [emblaApi]);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        onSelect();
-        emblaApi.on("select", onSelect);
-        emblaApi.on("reInit", onSelect);
-        return () => {
-            emblaApi.off("select", onSelect);
-            emblaApi.off("reInit", onSelect);
-        };
-    }, [emblaApi, onSelect]);
-
-    return (
-        <section id="projetos" className="section-padding bg-secondary/30">
-            <div className="container-narrow">
-                <div className="text-center mb-12 animate-fade-up">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-navy">
-                        Projetos
-                    </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Alguns dos projetos que desenvolvi durante minha jornada profissional
-                    </p>
-                </div>
-
-                <div className="relative animate-fade-up animation-delay-200">
-                    {/* Navigation Buttons */}
-                    <div className="flex items-center gap-4 justify-end mb-6">
-                        <button
-                            onClick={scrollPrev}
-                            disabled={!canScrollPrev}
-                            className="carousel-nav-button"
-                            aria-label="Projeto anterior"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                            onClick={scrollNext}
-                            disabled={!canScrollNext}
-                            className="carousel-nav-button"
-                            aria-label="Próximo projeto"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
-                    </div>
-
-                    {/* Carousel */}
-                    <div className="overflow-hidden" ref={emblaRef}>
-                        <div className="flex gap-6">
-                            {projects.map((project, index) => (
-                                <div
-                                    key={project.title}
-                                    className="flex-[0_0_100%] min-w-0 md:flex-[0_0_calc(50%-12px)]"
-                                >
-                                    <ProjectCard project={project} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Dots Indicator */}
-                    <div className="flex justify-center gap-2 mt-8">
-                        {projects.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => emblaApi?.scrollTo(index)}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                    selectedIndex === index
-                                        ? "bg-primary w-6"
-                                        : "bg-border hover:bg-primary/50"
-                                }`}
-                                aria-label={`Ir para projeto ${index + 1}`}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+      <style>{`
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 1.5rem;
+        }
+      `}</style>
+    </section>
+  );
 };
 
 export default ProjectsSection;

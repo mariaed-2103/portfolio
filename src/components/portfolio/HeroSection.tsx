@@ -1,42 +1,169 @@
-import { Button } from "@/components/ui/button.tsx";
 import { ArrowRight, Mail } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center section-padding relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/30 rounded-full blur-3xl" />
-      
-      <div className="container-narrow text-center relative z-10">
-        <div className="animate-fade-up">
-          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-navy bg-primary/20 rounded-full">
-            Desenvolvedora Full Stack
-          </span>
-        </div>
-        
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up animation-delay-100 text-navy">
-          Desenvolvedora Full Stack focada em construir{" "}
-          <span className="gradient-text">aplicações escaláveis</span> e eficientes
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "6rem 2rem 4rem",
+        position: "relative",
+        overflow: "hidden",
+        background: "#fdfdc9",
+      }}
+    >
+      {/* Background blobs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-120px",
+          right: "-120px",
+          width: "500px",
+          height: "500px",
+          background: "#e4cff0",
+          borderRadius: "50%",
+          opacity: 0.5,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-80px",
+          left: "-80px",
+          width: "320px",
+          height: "320px",
+          background: "#c69fd5",
+          borderRadius: "50%",
+          opacity: 0.2,
+        }}
+      />
+
+      <div style={{ position: "relative", zIndex: 1, maxWidth: "760px" }}>
+        <span
+          style={{
+            display: "inline-block",
+            padding: "0.35rem 1rem",
+            background: "#c69fd5",
+            color: "#1a1235",
+            fontSize: "0.78rem",
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            borderRadius: "100px",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Disponível para novas oportunidades
+        </span>
+
+        <h1
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontStyle: "italic",
+            fontWeight: 700,
+            fontSize: "clamp(2.4rem, 6vw, 4rem)",
+            lineHeight: 1.15,
+            marginBottom: "1.25rem",
+            color: "#1a1235",
+          }}
+        >
+          Desenvolvedora
+          <br />
+          <em style={{ color: "#9b6ab5" }}>Full Stack</em>
+          <br />
+          com visão de produto
         </h1>
-        
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-up animation-delay-200">
+
+        <p
+          style={{
+            fontSize: "0.92rem",
+            color: "#6b5f7a",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            fontWeight: 500,
+            marginBottom: "2.5rem",
+          }}
+        >
           Java · Spring Boot · React · WordPress
         </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up animation-delay-300">
-          <Button variant="hero" size="xl" asChild>
-            <a href="#projetos">
-              Ver Projetos
-              <ArrowRight className="ml-2" />
-            </a>
-          </Button>
-          <Button variant="hero-outline" size="xl" asChild>
-            <a href="#contato">
-              <Mail className="mr-2" />
-              Entrar em Contato
-            </a>
-          </Button>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <a
+            href="#projetos"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.75rem 1.75rem",
+              borderRadius: "100px",
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              textDecoration: "none",
+              background: "#1a1235",
+              color: "#fdfdc9",
+              border: "2px solid #1a1235",
+              transition: "all 0.2s",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget;
+              el.style.background = "#9b6ab5";
+              el.style.borderColor = "#9b6ab5";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget;
+              el.style.background = "#1a1235";
+              el.style.borderColor = "#1a1235";
+            }}
+          >
+            Ver Projetos
+            <ArrowRight size={16} />
+          </a>
+
+          <a
+            href="#contato"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.75rem 1.75rem",
+              borderRadius: "100px",
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.85rem",
+              fontWeight: 700,
+              textDecoration: "none",
+              background: "transparent",
+              color: "#1a1235",
+              border: "2px solid #1a1235",
+              transition: "all 0.2s",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget;
+              el.style.background = "#1a1235";
+              el.style.color = "#fdfdc9";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget;
+              el.style.background = "transparent";
+              el.style.color = "#1a1235";
+            }}
+          >
+            <Mail size={16} />
+            Entrar em Contato
+          </a>
         </div>
       </div>
     </section>
