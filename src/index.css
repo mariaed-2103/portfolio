@@ -106,7 +106,7 @@ h1, h2, h3, h4 {
   color: var(--lemon);
 }
 
-/* ── Skill chip ── */
+/* ── Skill chip (legado — mantido para compatibilidade) ── */
 .skill-chip {
   padding: 0.5rem 1.2rem;
   background: var(--card-bg);
@@ -124,7 +124,7 @@ h1, h2, h3, h4 {
   border-color: var(--wisteria);
 }
 
-/* ── Project card ── */
+/* ── Project card (legado — mantido para compatibilidade) ── */
 .project-card {
   background: var(--card-bg);
   border-radius: 1.25rem;
@@ -261,4 +261,59 @@ h1, h2, h3, h4 {
   font-weight: 700;
   font-size: 0.85rem;
   color: var(--navy);
+}
+
+/* ── About grid ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+@media (max-width: 700px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Skills grid ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Projects grid ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+@media (max-width: 800px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }

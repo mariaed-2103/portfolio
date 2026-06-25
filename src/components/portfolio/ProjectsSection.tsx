@@ -9,6 +9,7 @@ interface CodeLink {
 interface Project {
   title: string;
   description: string;
+  impact: string;
   technologies: string[];
   codeLinks?: CodeLink[];
 }
@@ -17,13 +18,15 @@ const projects: Project[] = [
   {
     title: "Plataforma Analytics Polaris",
     description:
-      "Plataforma web completa com Java e Spring Boot no backend e React no frontend. APIs REST e interfaces responsivas.",
+      "Full stack do zero ao deploy — backend Java + Spring Boot, frontend React, como freelance real com cliente.",
+    impact: "Entregue no prazo, com aprovação do cliente em todas as sprints.",
     technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
   },
   {
     title: "Plataforma Clube da Fábrica",
     description:
-      "Projeto interdisciplinar full stack com Java Spring Boot e React, aplicando APIs REST e integração entre camadas.",
+      "Projeto interdisciplinar full stack com backend e frontend separados, comunicando via APIs REST.",
+    impact: "Aprendi na prática o que significa ter um contrato de API de verdade.",
     technologies: ["Java", "Spring Boot", "React"],
     codeLinks: [
       { label: "Frontend", url: "https://github.com/mariaed-2103/clubedafabrica2025" },
@@ -31,40 +34,41 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "TCC — MindfulHarmony",
+    description:
+      "Sistema web de saúde mental — integração entre HTML, Java, PHP e PhpMyAdmin com foco em usabilidade.",
+    impact: "Primeiro projeto onde fui responsável pela arquitetura completa.",
+    technologies: ["Java", "PHP", "HTML", "PhpMyAdmin"],
+    codeLinks: [
+      { label: "Código", url: "https://github.com/mariaed-2103/TCC-MindfulHarmony" },
+    ],
+  },
+  {
     title: "Kanban Web",
     description:
-      "Aplicação Kanban em React focada em componentização, estado e renderização condicional.",
+      "App de tarefas em React com foco em componentização, estado e renderização condicional.",
+    impact: "Ainda uso como template de referência nos meus projetos React.",
     technologies: ["React", "JavaScript", "CSS"],
     codeLinks: [
       { label: "Código", url: "https://github.com/mariaed-2103/Kanban-em-React-para-iniciantes" },
     ],
   },
   {
-    title: "TCC — Sistema Web Integrado",
-    description:
-      "Sistema web integrando HTML, Java, PHP e PhpMyAdmin com foco em usabilidade — MindfulHarmony.",
-    technologies: ["HTML", "Java", "PHP", "PhpMyAdmin"],
-    codeLinks: [
-      { label: "Código", url: "https://github.com/mariaed-2103/TCC-MindfulHarmony" },
-    ],
-  },
-  {
-    title: "Calculadora React",
-    description:
-      "Calculadora com foco em componentização e boas práticas de UI/UX em React.",
-    technologies: ["React", "CSS"],
-    codeLinks: [
-      { label: "Código", url: "https://github.com/mariaed-2103/calculadora-react" },
-    ],
-  },
-  {
     title: "FitFoco",
     description:
-      "App mobile para registro de treinos com interface reativa, gerenciamento de estado e persistência offline.",
+      "App mobile de treinos com interface reativa, estado e persistência offline em Flutter.",
+    impact: "Primeira vez com mobile — saí sabendo que consigo aprender qualquer stack.",
     technologies: ["Flutter", "Dart", "Firebase"],
     codeLinks: [
       { label: "Código", url: "https://github.com/mariaed-2103/LP3-FocoFit" },
     ],
+  },
+  {
+    title: "Startup VeloCidade",
+    description:
+      "Solução de mobilidade urbana criada do zero como cofundadora — produto, pitch e validação.",
+    impact: "2º lugar em competição — aprendi a vender uma ideia tanto quanto a construí-la.",
+    technologies: ["Produto", "UX", "Empreendedorismo"],
   },
 ];
 
@@ -77,55 +81,72 @@ const ProjectCard = ({ project }: { project: Project }) => {
       onMouseLeave={() => setHovered(false)}
       style={{
         background: "#fff",
-        borderRadius: "1.25rem",
-        padding: "1.5rem",
+        borderRadius: "1.1rem",
+        padding: "1.25rem",
         border: "1.5px solid rgba(198,159,213,0.3)",
         display: "flex",
         flexDirection: "column",
-        gap: "0.75rem",
+        gap: "0.65rem",
         transition: "transform 0.2s, box-shadow 0.2s",
-        transform: hovered ? "translateY(-4px)" : "none",
-        boxShadow: hovered ? "0 12px 32px rgba(198,159,213,0.25)" : "none",
+        transform: hovered ? "translateY(-3px)" : "none",
+        boxShadow: hovered ? "0 10px 28px rgba(198,159,213,0.2)" : "none",
       }}
     >
-      <h3
+      {/* Título */}
+      <div
         style={{
           fontFamily: "'Playfair Display', serif",
           fontStyle: "italic",
           fontWeight: 700,
-          fontSize: "1rem",
-          lineHeight: 1.3,
+          fontSize: "0.95rem",
           color: "#1a1235",
+          lineHeight: 1.35,
         }}
       >
         {project.title}
-      </h3>
+      </div>
 
+      {/* Descrição */}
       <p
         style={{
-          fontSize: "0.83rem",
+          fontSize: "0.8rem",
           color: "#6b5f7a",
+          lineHeight: 1.6,
           flex: 1,
-          display: "-webkit-box",
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
         }}
       >
         {project.description}
       </p>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+      {/* Impacto */}
+      <div
+        style={{
+          padding: "0.55rem 0.75rem",
+          background: "#f7f0fc",
+          borderLeft: "2.5px solid #c69fd5",
+          borderRadius: "0 0.5rem 0.5rem 0",
+          fontSize: "0.75rem",
+          color: "#6b5f7a",
+          lineHeight: 1.5,
+          fontFamily: "'Montserrat', sans-serif",
+        }}
+      >
+        ✦ {project.impact}
+      </div>
+
+      {/* Tags */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
         {project.technologies.map((tech) => (
           <span
             key={tech}
             style={{
-              padding: "0.2rem 0.65rem",
+              padding: "0.18rem 0.55rem",
               background: "#e4cff0",
               borderRadius: "100px",
-              fontSize: "0.72rem",
+              fontSize: "0.68rem",
               fontWeight: 600,
               color: "#1a1235",
+              fontFamily: "'Montserrat', sans-serif",
             }}
           >
             {tech}
@@ -133,8 +154,9 @@ const ProjectCard = ({ project }: { project: Project }) => {
         ))}
       </div>
 
+      {/* Links */}
       {project.codeLinks && (
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
           {project.codeLinks.map((link) => (
             <a
               key={link.url}
@@ -144,15 +166,16 @@ const ProjectCard = ({ project }: { project: Project }) => {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.35rem",
-                fontSize: "0.78rem",
+                gap: "0.3rem",
+                fontSize: "0.72rem",
                 fontWeight: 700,
                 color: "#9b6ab5",
                 textDecoration: "none",
                 border: "1.5px solid #c69fd5",
                 borderRadius: "100px",
-                padding: "0.3rem 0.75rem",
+                padding: "0.25rem 0.65rem",
                 transition: "all 0.2s",
+                fontFamily: "'Montserrat', sans-serif",
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget;
@@ -167,7 +190,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 el.style.color = "#9b6ab5";
               }}
             >
-              <Github size={12} />
+              <Github size={11} />
               ⇗ {link.label}
             </a>
           ))}
@@ -179,10 +202,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 const ProjectsSection = () => {
   return (
-    <section
-      id="projetos"
-      style={{ padding: "5rem 2rem", background: "#fdfdc9" }}
-    >
+    <section id="projetos" style={{ padding: "5rem 2rem", background: "#fdfdc9" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <p
           style={{
@@ -221,8 +241,14 @@ const ProjectsSection = () => {
       <style>{`
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-          gap: 1.5rem;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.1rem;
+        }
+        @media (max-width: 800px) {
+          .projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) {
+          .projects-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>
