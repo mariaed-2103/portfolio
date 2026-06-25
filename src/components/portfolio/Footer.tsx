@@ -1,39 +1,32 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer className="py-6 px-8 bg-navy text-wisteria-light flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-[0.82rem]">
+    <footer className="py-6 px-8 bg-[#1a1235] text-[#e4cff0] flex flex-row items-center justify-between gap-4 font-sans text-[0.82rem]">
       <p className="tracking-wide">
-        © {currentYear} – Desenvolvido por <span className="font-semibold text-white">Maria Eduarda Zinatto</span>
+        © 2026 Maria Eduarda Zinatto
       </p>
       
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-5 footer-links">
         <a 
           href="https://github.com/mariaed-2103" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-wisteria-light hover:text-wisteria transition-colors"
-          aria-label="GitHub"
+          className="text-[#e4cff0] hover:text-[#c69fd5] transition-colors underline"
         >
-          <Github className="w-4 h-4" />
+          GitHub
         </a>
         <a 
           href="https://linkedin.com/in/maria-eduarda-zinatto-94a6881a2" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-wisteria-light hover:text-wisteria transition-colors"
-          aria-label="LinkedIn"
+          className="text-[#e4cff0] hover:text-[#c69fd5] transition-colors underline"
         >
-          <Linkedin className="w-4 h-4" />
+          LinkedIn
         </a>
         <a 
           href="mailto:mariaedzinattoo@gmail.com"
-          className="text-wisteria-light hover:text-wisteria transition-colors"
-          aria-label="Email"
+          className="text-[#e4cff0] hover:text-[#c69fd5] transition-colors underline"
         >
-          <Mail className="w-4 h-4" />
+          Email
         </a>
       </div>
     </footer>
