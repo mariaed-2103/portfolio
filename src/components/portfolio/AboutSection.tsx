@@ -77,23 +77,15 @@ const AboutSection = () => {
           {/* Coluna direita: texto */}
           <div style={{ display: "flex", flexDirection: "column", paddingTop: "0.25rem" }}>
             <p style={{ color: "#6b5f7a", fontSize: "0.92rem", marginBottom: "0.9rem" }}>
-              Sou a <strong style={{ color: "#1a1235" }}>Maria Eduarda</strong>, desenvolvedora
-              full stack apaixonada por resolver problemas reais com código limpo e interfaces que
-              fazem sentido pra quem usa.
+              Sou a <strong style={{ color: "#1a1235" }}>Maria Eduarda</strong>, atualmente tenho 20 anos e sou desenvolvedora full stack júnior. Gosto muito de criar sites e sistemas novos para diversos profissionais e de diferentes áreas, o que me dá mais repertório e me faz aprender constantemente com a programação.
             </p>
+
             <p style={{ color: "#6b5f7a", fontSize: "0.92rem", marginBottom: "0.9rem" }}>
-              Minha base é sólida em{" "}
-              <strong style={{ color: "#1a1235" }}>Java e Spring Boot</strong> — onde me sinto mais
-              em casa — mas o dia a dia me fez crescer muito com{" "}
-              <strong style={{ color: "#1a1235" }}>PHP e SQL Server</strong>, integrando sistemas
-              legados e aprendendo a transitar entre mundos diferentes.
+              Minha base é sólida em <strong style={{ color: "#1a1235" }}>Java e Spring Boot</strong>, tecnologias com as quais tenho mais contato por conta da faculdade. No dia a dia, também uso e tenho contato com outras linguagens e ferramentas, como <strong style={{ color: "#1a1235" }}>PHP, PL/SQL, Bootstrap e React</strong>.
             </p>
+
             <p style={{ color: "#6b5f7a", fontSize: "0.92rem", marginBottom: "1.25rem" }}>
-              Estudante de{" "}
-              <strong style={{ color: "#1a1235" }}>Informática para Negócios</strong> na Fatec,
-              formada como Técnica em Desenvolvimento de Sistemas pela Etec. Cofundadora da startup{" "}
-              <strong style={{ color: "#1a1235" }}>VeloCidade</strong> — 2º lugar em competição de
-              empreendedorismo.
+              Atualmente, sou estudante do 6º e último período da faculdade de <strong style={{ color: "#1a1235" }}>Informática para Negócios</strong> na Fatec e também sou formada como técnica em Desenvolvimento de Sistemas pela <strong style={{ color: "#1a1235" }}>Etec Philadelpho Gouvêa Netto</strong>. Além disso, realizei alguns cursos complementares, como liderança e empreendedorismo, marketing e audiovisual.
             </p>
 
             {/* Citação */}
