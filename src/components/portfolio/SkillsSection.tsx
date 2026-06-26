@@ -12,7 +12,7 @@ const skills: Skill[] = [
   // main
   { name: "Java", tier: "main", cat: "backend" },
   { name: "Spring Boot", tier: "main", cat: "backend" },
-  { name: "PHP", tier: "familiar", cat: "backend" },
+  { name: "PHP", tier: "main", cat: "backend" },
   { name: "REST APIs", tier: "main", cat: "backend" },
   { name: "React", tier: "main", cat: "frontend" },
   { name: "HTML & CSS", tier: "main", cat: "frontend" },
@@ -22,8 +22,8 @@ const skills: Skill[] = [
   { name: "VS Code", tier: "main", cat: "tools" },
   { name: "Postman", tier: "main", cat: "tools" },
   // familiar
-  { name: "TypeScript", tier: "main", cat: "frontend" },
-  { name: "Tailwind CSS", tier: "main", cat: "frontend" },
+  { name: "TypeScript", tier: "familiar", cat: "frontend" },
+  { name: "Tailwind CSS", tier: "familiar", cat: "frontend" },
   { name: "WordPress", tier: "familiar", cat: "frontend" },
   { name: "MySQL", tier: "familiar", cat: "database" },
   { name: "Firebase", tier: "familiar", cat: "database" },
