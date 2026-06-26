@@ -84,10 +84,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
         borderRadius: "1.1rem",
         padding: "1.25rem",
         border: "1.5px solid rgba(198,159,213,0.3)",
-        display: "flex",
-        flexDirection: "column",
+        // Mudança para CSS Grid dentro do card para controlar rigidamente o fluxo vertical
+        display: "grid",
+        gridTemplateRows: "auto 1fr auto", 
         gap: "0.65rem",
         height: "100%",
+        boxSizing: "border-box",
         transition: "transform 0.2s, box-shadow 0.2s",
         transform: hovered ? "translateY(-3px)" : "none",
         boxShadow: hovered ? "0 10px 28px rgba(198,159,213,0.2)" : "none",
@@ -107,21 +109,24 @@ const ProjectCard = ({ project }: { project: Project }) => {
         {project.title}
       </div>
 
-      {/* Descrição — flex:1 empurra o bloco inferior para o fundo */}
+      {/* Descrição — Definimos uma min-height estimada para descrições curtas respirarem */}
       <p
         style={{
           fontSize: "0.8rem",
           color: "#6b5f7a",
           lineHeight: 1.6,
-          flex: 1,
+          margin: 0,
+          display: "flex",
+          alignItems: "flex-start",
+          minHeight: "4.5rem", // Garante que textos menores (como do FitFoco) ocupem o espaço de 3 linhas, alinhando o bloco de baixo
         }}
       >
         {project.description}
       </p>
 
-      {/* Bloco inferior: impacto + tags + links sempre alinhados */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-        {/* Impacto */}
+      {/* Bloco inferior: impacto + tags + links sempre alinhados no fundo */}
+      <div style={{ display: "grid", gridTemplateRows: "auto auto 1.8rem", gap: "0.65rem", alignItems: "end" }}>
+        {/* Impacto — Altura mínima para evitar que 1 linha vs 2 linhas desalinhem as tags abaixo */}
         <div
           style={{
             padding: "0.55rem 0.75rem",
@@ -132,13 +137,16 @@ const ProjectCard = ({ project }: { project: Project }) => {
             color: "#6b5f7a",
             lineHeight: 1.5,
             fontFamily: "'Montserrat', sans-serif",
+            minHeight: "2.2rem", 
+            display: "flex",
+            alignItems: "center"
           }}
         >
           ✦ {project.impact}
         </div>
 
         {/* Tags */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", minHeight: "2.2rem", alignItems: "center" }}>
           {project.technologies.map((tech) => (
             <span
               key={tech}
@@ -157,10 +165,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
           ))}
         </div>
 
-        {/* Links */}
-        {project.codeLinks && (
-          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-            {project.codeLinks.map((link) => (
+        {/* Links — Agora fixados no final usando o grid container */}
+        <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", height: "100%", alignItems: "center" }}>
+          {project.codeLinks ? (
+            project.codeLinks.map((link) => (
               <a
                 key={link.url}
                 href={link.url}
@@ -196,9 +204,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 <Github size={11} />
                 ⇗ {link.label}
               </a>
-            ))}
-          </div>
-        )}
+            ))
+          ) : (
+            /* Div fantasma para manter a ocupação de espaço caso não existam botões */
+            <div style={{ height: "1.5rem" }} />
+          )}
+        </div>
       </div>
     </article>
   );
