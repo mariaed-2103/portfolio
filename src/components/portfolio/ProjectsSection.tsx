@@ -18,8 +18,8 @@ const projects: Project[] = [
   {
     title: "Plataforma Analytics Polaris",
     description:
-      "Projeto desenvolvido como Desenvolvedora Freelancer, onde atuei na criação de uma plataforma de análise de métricas para anúncios de produtos do Mercado Livre. O ecossistema foi construído utilizando Java com Spring Boot no backend e React no frontend.",
-    impact: "Expandi expressivamente meu domínio em Java Spring Boot e adquiri uma visão analítica sobre inteligência de dados e métricas de e-commerce.",
+      "Desenvolvimento Full Stack colaborativo, atuando diretamente em parceria com o supervisor no desenvolvimento de uma plataforma de métricas para o Mercado Livre com Java, Spring Boot e React.",
+    impact: "Entrega bem-sucedida das funcionalidades de análise, garantindo a aprovação do cliente a cada sprint.",
     technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
   },
   {
@@ -66,8 +66,8 @@ const projects: Project[] = [
   {
     title: "Startup VeloCidade",
     description:
-      "Solução de mobilidade urbana criada do zero como cofundadora, atuando diretamente nas frentes de produto, pitch estruturado e validação de mercado.",
-    impact: "Conquista do 2º lugar na competição do Instituto Escola Jovens de Negócios; experiência que consolidou minha visão empreendedora e capacidade de resolver problemas reais de alta complexidade.",
+      "Solução de mobilidade urbana concebida do zero como cofundadora, atuando diretamente no desenvolvimento do produto, pitch e validação de mercado.",
+    impact: "Conquista do 2º lugar em competição — onde aprendi a vender uma ideia tão bem quanto sei construí-la.",
     technologies: ["Produto", "UX", "Empreendedorismo"],
   },
 ];
