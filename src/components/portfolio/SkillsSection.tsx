@@ -1,239 +1,159 @@
-import React from "react";
+import React, { useState } from "react";
+
+type Category = "all" | "backend" | "frontend" | "database" | "tools";
 
 interface Skill {
   name: string;
-  level: number;
-  tier: "love" | "work" | "familiar";
-  heart?: boolean;
+  tier: "main" | "familiar";
+  cat: Category;
 }
 
-interface SkillGroup {
-  label: string;
-  skills: Skill[];
-}
+const skills: Skill[] = [
+  // main
+  { name: "Java", tier: "main", cat: "backend" },
+  { name: "Spring Boot", tier: "main", cat: "backend" },
+  { name: "REST APIs", tier: "main", cat: "backend" },
+  { name: "React", tier: "main", cat: "frontend" },
+  { name: "HTML & CSS", tier: "main", cat: "frontend" },
+  { name: "TypeScript", tier: "main", cat: "frontend" },
+  { name: "Tailwind CSS", tier: "main", cat: "frontend" },
+  { name: "SQL Server", tier: "main", cat: "database" },
+  { name: "Git & GitHub", tier: "main", cat: "tools" },
+  { name: "IntelliJ", tier: "main", cat: "tools" },
+  { name: "VS Code", tier: "main", cat: "tools" },
+  { name: "Postman", tier: "main", cat: "tools" },
+  // familiar
+  { name: "PHP", tier: "familiar", cat: "backend" },
+  { name: "WordPress", tier: "familiar", cat: "frontend" },
+  { name: "MySQL", tier: "familiar", cat: "database" },
+  { name: "Firebase", tier: "familiar", cat: "database" },
+  { name: "Flutter", tier: "familiar", cat: "tools" },
+  { name: "Dart", tier: "familiar", cat: "tools" },
+];
 
-const backendSkills: SkillGroup = {
-  label: "Backend",
-  skills: [
-    { name: "Java", level: 88, tier: "love", heart: true },
-    { name: "Spring Boot", level: 82, tier: "love", heart: true },
-    { name: "PHP", level: 65, tier: "work" },
-    { name: "REST APIs", level: 80, tier: "work" },
-  ],
-};
+const filters: { label: string; value: Category }[] = [
+  { label: "Tudo", value: "all" },
+  { label: "Backend", value: "backend" },
+  { label: "Frontend", value: "frontend" },
+  { label: "Banco de dados", value: "database" },
+  { label: "Ferramentas", value: "tools" },
+];
 
-const frontendSkills: SkillGroup = {
-  label: "Frontend",
-  skills: [
-    { name: "React", level: 78, tier: "love", heart: true },
-    { name: "HTML & CSS", level: 85, tier: "work" },
-    { name: "TypeScript", level: 65, tier: "work" },
-    { name: "Tailwind CSS", level: 72, tier: "work" },
-    { name: "WordPress", level: 58, tier: "familiar" },
-  ],
-};
-
-const dbSkills: SkillGroup = {
-  label: "Banco de Dados",
-  skills: [
-    { name: "SQL Server", level: 70, tier: "work" },
-    { name: "MySQL", level: 52, tier: "familiar" },
-    { name: "Firebase", level: 42, tier: "familiar" },
-  ],
-};
-
-const tools = ["Git & GitHub", "Postman", "IntelliJ", "VS Code"];
-const toolsFamiliar = ["Flutter", "Dart"];
-
-const tierStyle = {
-  love: { bg: "#9b6ab5", color: "#fff", label: "Amo" },
-  work: { bg: "#e4cff0", color: "#1a1235", label: "Trabalho" },
-  familiar: { bg: "transparent", color: "#6b5f7a", label: "Conheço", border: "1.5px solid rgba(198,159,213,0.5)" },
-};
-
-const barColor = {
-  love: "#9b6ab5",
-  work: "#c69fd5",
-  familiar: "#e4cff0",
-};
-
-const SkillRow = ({ skill }: { skill: Skill }) => {
-  const t = tierStyle[skill.tier];
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span
-          style={{
-            fontSize: "0.8rem",
-            fontWeight: skill.tier === "familiar" ? 600 : 700,
-            color: skill.tier === "familiar" ? "#6b5f7a" : "#1a1235",
-            fontFamily: "'Montserrat', sans-serif",
-          }}
-        >
-          {skill.name}
-          {skill.heart && (
-            <span style={{ color: "#9b6ab5", marginLeft: "0.3rem", fontSize: "0.75rem" }}>♥</span>
-          )}
-        </span>
-        <span
-          style={{
-            fontSize: "0.65rem",
-            fontWeight: 700,
-            padding: "0.15rem 0.5rem",
-            borderRadius: "100px",
-            background: t.bg,
-            color: t.color,
-            border: (t as any).border ?? "none",
-            fontFamily: "'Montserrat', sans-serif",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {t.label}
-        </span>
-      </div>
-      <div
+const SkillChip = ({ skill }: { skill: Skill }) => {
+  if (skill.tier === "main") {
+    return (
+      <span
         style={{
-          height: "5px",
-          background: "rgba(198,159,213,0.2)",
+          display: "inline-flex",
+          alignItems: "center",
+          padding: "7px 16px",
           borderRadius: "100px",
-          overflow: "hidden",
+          fontSize: "0.82rem",
+          fontWeight: 600,
+          background: "var(--navy)",
+          color: "var(--lemon)",
+          fontFamily: "'Montserrat', sans-serif",
+          whiteSpace: "nowrap",
         }}
       >
-        <div
-          style={{
-            height: "100%",
-            width: `${skill.level}%`,
-            background: barColor[skill.tier],
-            borderRadius: "100px",
-          }}
-        />
-      </div>
-    </div>
+        {skill.name}
+      </span>
+    );
+  }
+
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "7px 16px",
+        borderRadius: "100px",
+        fontSize: "0.82rem",
+        fontWeight: 600,
+        background: "transparent",
+        color: "var(--muted)",
+        border: "1.5px solid rgba(198,159,213,0.45)",
+        fontFamily: "'Montserrat', sans-serif",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {skill.name}
+    </span>
   );
 };
 
-const SkillCard = ({
-  group,
-  children,
-}: {
-  group?: SkillGroup;
-  children?: React.ReactNode;
-}) => (
-  <div
-    style={{
-      background: "#fff",
-      border: "1.5px solid rgba(198,159,213,0.25)",
-      borderRadius: "1rem",
-      padding: "1.25rem",
-      display: "flex",
-      flexDirection: "column",
-      gap: "0.85rem",
-    }}
-  >
-    {group && (
-      <>
-        <div
-          style={{
-            fontSize: "0.65rem",
-            fontWeight: 700,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#9b6ab5",
-            paddingBottom: "0.6rem",
-            borderBottom: "1px solid rgba(198,159,213,0.2)",
-            fontFamily: "'Montserrat', sans-serif",
-          }}
-        >
-          {group.label}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-          {group.skills.map((s) => (
-            <SkillRow key={s.name} skill={s} />
-          ))}
-        </div>
-      </>
-    )}
-    {children}
-  </div>
-);
-
 const SkillsSection = () => {
+  const [active, setActive] = useState<Category>("all");
+
+  const visible = (tier: "main" | "familiar") =>
+    skills.filter(
+      (s) => s.tier === tier && (active === "all" || s.cat === active)
+    );
+
+  const mainSkills = visible("main");
+  const familiarSkills = visible("familiar");
+
   return (
-    <section id="habilidades" style={{ padding: "5rem 2rem", background: "#f7f0fc" }}>
+    <section
+      id="habilidades"
+      style={{ padding: "5rem 2rem", background: "var(--section-soft)" }}
+    >
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#9b6ab5",
-            marginBottom: "0.5rem",
-          }}
-        >
-          Tecnologias
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontStyle: "italic",
-            fontWeight: 700,
-            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-            marginBottom: "1rem",
-            color: "#1a1235",
-            lineHeight: 1.2,
-          }}
-        >
-          Habilidades
-        </h2>
+        {/* Header */}
+        <p className="section-label">Tecnologias</p>
+        <h2 className="section-title">Habilidades</h2>
 
         <p
           style={{
             fontSize: "0.88rem",
-            color: "#6b5f7a",
+            color: "var(--muted)",
             marginBottom: "2rem",
-            maxWidth: "600px",
+            maxWidth: "580px",
+            lineHeight: 1.7,
+            fontFamily: "'Montserrat', sans-serif",
           }}
         >
-          Nem toda tecnologia que conheço uso com a mesma profundidade — e tá tudo bem com isso.
-          Aqui é honesto: o que domino, o que uso no dia a dia e o que já explorei.
+          Tecnologias com as quais já trabalhei — separadas entre as que tenho
+          mais afinidade e as que já toquei mas não uso no dia a dia.
         </p>
 
-        {/* Legenda */}
+        {/* Legend */}
         <div
           style={{
             display: "flex",
             gap: "1.5rem",
-            marginBottom: "2rem",
             flexWrap: "wrap",
+            marginBottom: "1.75rem",
             alignItems: "center",
           }}
         >
           {[
-            { color: "#9b6ab5", label: "Amo & domino", border: false },
-            { color: "#c69fd5", label: "Uso no trabalho", border: false },
-            { color: "#e4cff0", label: "Já trabalhei / conheço", border: true },
+            { label: "Tenho mais afinidade", filled: true },
+            { label: "Já tive contato", filled: false },
           ].map((item) => (
             <div
               key={item.label}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                color: "#6b5f7a",
+                gap: "8px",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "var(--muted)",
                 fontFamily: "'Montserrat', sans-serif",
               }}
             >
               <span
                 style={{
-                  width: "12px",
-                  height: "12px",
+                  width: "10px",
+                  height: "10px",
                   borderRadius: "50%",
-                  background: item.color,
-                  border: item.border ? "1.5px solid #c69fd5" : "none",
+                  background: item.filled
+                    ? "var(--navy)"
+                    : "rgba(198,159,213,0.4)",
+                  border: item.filled
+                    ? "none"
+                    : "1.5px solid rgba(198,159,213,0.5)",
                   flexShrink: 0,
                   display: "inline-block",
                 }}
@@ -243,93 +163,111 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Grid 3 colunas */}
-        <div className="skills-grid">
-          <SkillCard group={backendSkills} />
-          <SkillCard group={frontendSkills} />
-
-          {/* Coluna 3: Banco + Ferramentas */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            <SkillCard group={dbSkills} />
-
-            {/* Ferramentas */}
-            <div
+        {/* Filters */}
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            flexWrap: "wrap",
+            marginBottom: "2.25rem",
+          }}
+        >
+          {filters.map((f) => (
+            <button
+              key={f.value}
+              onClick={() => setActive(f.value)}
               style={{
-                background: "#fff",
-                border: "1.5px solid rgba(198,159,213,0.25)",
-                borderRadius: "1rem",
-                padding: "1.25rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.85rem",
+                padding: "6px 16px",
+                borderRadius: "100px",
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                cursor: "pointer",
+                border: active === f.value
+                  ? "1.5px solid var(--navy)"
+                  : "1.5px solid rgba(198,159,213,0.4)",
+                background: active === f.value ? "var(--navy)" : "transparent",
+                color: active === f.value ? "var(--lemon)" : "var(--muted)",
+                transition: "all 0.15s",
+                fontFamily: "'Montserrat', sans-serif",
+                letterSpacing: "0.04em",
               }}
             >
-              <div
-                style={{
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "#9b6ab5",
-                  paddingBottom: "0.6rem",
-                  borderBottom: "1px solid rgba(198,159,213,0.2)",
-                  fontFamily: "'Montserrat', sans-serif",
-                }}
-              >
-                Ferramentas
-              </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-                {tools.map((t) => (
-                  <span
-                    key={t}
-                    style={{
-                      padding: "0.25rem 0.65rem",
-                      background: "#e4cff0",
-                      borderRadius: "100px",
-                      fontSize: "0.72rem",
-                      fontWeight: 600,
-                      color: "#1a1235",
-                      fontFamily: "'Montserrat', sans-serif",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-                {toolsFamiliar.map((t) => (
-                  <span
-                    key={t}
-                    style={{
-                      padding: "0.25rem 0.65rem",
-                      background: "transparent",
-                      border: "1.5px solid rgba(198,159,213,0.4)",
-                      borderRadius: "100px",
-                      fontSize: "0.72rem",
-                      fontWeight: 600,
-                      color: "#6b5f7a",
-                      fontFamily: "'Montserrat', sans-serif",
-                    }}
-                  >
-                    {t}
-                  </span>
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Skill groups */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          {mainSkills.length > 0 && (
+            <div>
+              <GroupLabel>Tenho mais afinidade</GroupLabel>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                {mainSkills.map((s) => (
+                  <SkillChip key={s.name} skill={s} />
                 ))}
               </div>
             </div>
-          </div>
+          )}
+
+          {familiarSkills.length > 0 && (
+            <div>
+              <GroupLabel>Já tive contato</GroupLabel>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                {familiarSkills.map((s) => (
+                  <SkillChip key={s.name} skill={s} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {mainSkills.length === 0 && familiarSkills.length === 0 && (
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "var(--muted)",
+                fontFamily: "'Montserrat', sans-serif",
+              }}
+            >
+              Nenhuma tecnologia nessa categoria.
+            </p>
+          )}
         </div>
       </div>
-
-      <style>{`
-        .skills-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 1.25rem;
-        }
-        @media (max-width: 800px) {
-          .skills-grid { grid-template-columns: 1fr; }
-        }
-      `}</style>
     </section>
   );
 };
+
+const GroupLabel = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      marginBottom: "0.85rem",
+    }}
+  >
+    <span
+      style={{
+        fontSize: "0.68rem",
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        color: "var(--wisteria-dark)",
+        fontFamily: "'Montserrat', sans-serif",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {children}
+    </span>
+    <span
+      style={{
+        flex: 1,
+        height: "1px",
+        background: "rgba(198,159,213,0.25)",
+      }}
+    />
+  </div>
+);
 
 export default SkillsSection;
