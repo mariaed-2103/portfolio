@@ -87,6 +87,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         display: "flex",
         flexDirection: "column",
         gap: "0.65rem",
+        height: "100%",
         transition: "transform 0.2s, box-shadow 0.2s",
         transform: hovered ? "translateY(-3px)" : "none",
         boxShadow: hovered ? "0 10px 28px rgba(198,159,213,0.2)" : "none",
@@ -106,7 +107,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         {project.title}
       </div>
 
-      {/* Descrição */}
+      {/* Descrição — flex:1 empurra o bloco inferior para o fundo */}
       <p
         style={{
           fontSize: "0.8rem",
@@ -118,84 +119,87 @@ const ProjectCard = ({ project }: { project: Project }) => {
         {project.description}
       </p>
 
-      {/* Impacto */}
-      <div
-        style={{
-          padding: "0.55rem 0.75rem",
-          background: "#f7f0fc",
-          borderLeft: "2.5px solid #c69fd5",
-          borderRadius: "0 0.5rem 0.5rem 0",
-          fontSize: "0.75rem",
-          color: "#6b5f7a",
-          lineHeight: 1.5,
-          fontFamily: "'Montserrat', sans-serif",
-        }}
-      >
-        ✦ {project.impact}
-      </div>
+      {/* Bloco inferior: impacto + tags + links sempre alinhados */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+        {/* Impacto */}
+        <div
+          style={{
+            padding: "0.55rem 0.75rem",
+            background: "#f7f0fc",
+            borderLeft: "2.5px solid #c69fd5",
+            borderRadius: "0 0.5rem 0.5rem 0",
+            fontSize: "0.75rem",
+            color: "#6b5f7a",
+            lineHeight: 1.5,
+            fontFamily: "'Montserrat', sans-serif",
+          }}
+        >
+          ✦ {project.impact}
+        </div>
 
-      {/* Tags */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
-        {project.technologies.map((tech) => (
-          <span
-            key={tech}
-            style={{
-              padding: "0.18rem 0.55rem",
-              background: "#e4cff0",
-              borderRadius: "100px",
-              fontSize: "0.68rem",
-              fontWeight: 600,
-              color: "#1a1235",
-              fontFamily: "'Montserrat', sans-serif",
-            }}
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {/* Links */}
-      {project.codeLinks && (
-        <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-          {project.codeLinks.map((link) => (
-            <a
-              key={link.url}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
+        {/* Tags */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                color: "#9b6ab5",
-                textDecoration: "none",
-                border: "1.5px solid #c69fd5",
+                padding: "0.18rem 0.55rem",
+                background: "#e4cff0",
                 borderRadius: "100px",
-                padding: "0.25rem 0.65rem",
-                transition: "all 0.2s",
+                fontSize: "0.68rem",
+                fontWeight: 600,
+                color: "#1a1235",
                 fontFamily: "'Montserrat', sans-serif",
               }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "#9b6ab5";
-                el.style.borderColor = "#9b6ab5";
-                el.style.color = "#fff";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "transparent";
-                el.style.borderColor = "#c69fd5";
-                el.style.color = "#9b6ab5";
-              }}
             >
-              <Github size={11} />
-              ⇗ {link.label}
-            </a>
+              {tech}
+            </span>
           ))}
         </div>
-      )}
+
+        {/* Links */}
+        {project.codeLinks && (
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+            {project.codeLinks.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.3rem",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  color: "#9b6ab5",
+                  textDecoration: "none",
+                  border: "1.5px solid #c69fd5",
+                  borderRadius: "100px",
+                  padding: "0.25rem 0.65rem",
+                  transition: "all 0.2s",
+                  fontFamily: "'Montserrat', sans-serif",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "#9b6ab5";
+                  el.style.borderColor = "#9b6ab5";
+                  el.style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "transparent";
+                  el.style.borderColor = "#c69fd5";
+                  el.style.color = "#9b6ab5";
+                }}
+              >
+                <Github size={11} />
+                ⇗ {link.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
     </article>
   );
 };
