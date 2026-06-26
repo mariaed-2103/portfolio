@@ -103,8 +103,8 @@ const AboutSection = () => {
                 margin: 0,
               }}
             >
-              Oi, sou a <strong style={{ color: "#1a1235" }}>Maria Eduarda</strong>, 20 anos,
-              desenvolvedora full stack júnior. Gosto de criar soluções para profissionais de
+              Oi, sou a <strong style={{ color: "#1a1235" }}>Maria Eduarda</strong>, tenho 20 anos,
+              sou desenvolvedora full stack júnior. Gosto de criar soluções para profissionais de
               diferentes áreas — o que me faz crescer constantemente.
             </p>
 
@@ -120,9 +120,9 @@ const AboutSection = () => {
               Minha base é <strong style={{ color: "#1a1235" }}>Java e Spring Boot</strong>, com o
               dia a dia em{" "}
               <strong style={{ color: "#1a1235" }}>PHP, PL/SQL, Bootstrap e React</strong>. Estou
-              no 6º período de{" "}
+              no 6º e últimoperíodo de{" "}
               <strong style={{ color: "#1a1235" }}>Informática para Negócios</strong> na Fatec e
-              sou técnica formada pela{" "}
+              sou técnica em Desenvolvimento de Sistemas formada pela{" "}
               <strong style={{ color: "#1a1235" }}>Etec Philadelpho Gouvêa Netto</strong>.
             </p>
 
