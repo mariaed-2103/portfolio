@@ -61,8 +61,8 @@ const AboutSection = () => {
               }}
             >
               {[
-                { label: "Backend com alma frontend", main: true },
-                { label: "Curiosa por natureza", main: false },
+                { label: "Desenvolvedora Full-Stack", main: true },
+                { label: "Código & UI/UX Design", main: false },
                 { label: "Sempre aprendendo", main: false },
               ].map((chip) => (
                 <span
@@ -136,7 +136,7 @@ const AboutSection = () => {
                 margin: 0,
               }}
             >
-              ✦ Programar, pra mim, é entender o problema antes de abrir o editor.
+              ✦ Para mim, programar é pensar fora da caixa e expandir meu repertório para além do que já conheço.
             </p>
 
             <div
@@ -149,7 +149,7 @@ const AboutSection = () => {
             />
 
             <div className="values-grid">
-              {["Detalhista", "Colaborativa", "Visão de produto", "Foco em usabilidade"].map(
+              {["Detalhista", "Colaborativa", "Visão empreendedora", "Dedicada"].map(
                 (valor) => (
                   <div
                     key={valor}
