@@ -1,5 +1,5 @@
-import { Github } from "lucide-react";
 import { useState } from "react";
+import { Github } from "lucide-react";
 
 interface CodeLink {
   label: string;
@@ -18,8 +18,8 @@ const projects: Project[] = [
   {
     title: "Plataforma Analytics Polaris",
     description:
-      "Desenvolvimento Full Stack colaborativo, atuando diretamente em parceria com o supervisor no desenvolvimento de uma plataforma de métricas para o Mercado Livre com Java, Spring Boot e React.",
-    impact: "Entrega bem-sucedida das funcionalidades de análise, garantindo a aprovação do cliente a cada sprint.",
+      "Desenvolvimento Full Stack em parceria com o supervisor — plataforma de métricas para o Mercado Livre com Java, Spring Boot e React.",
+    impact: "Entrega bem-sucedida das funcionalidades de análise, garantindo aprovação do cliente a cada sprint.",
     technologies: ["Java", "Spring Boot", "React", "Tailwind CSS"],
   },
   {
@@ -66,195 +66,75 @@ const projects: Project[] = [
   {
     title: "Startup VeloCidade",
     description:
-      "Solução de mobilidade urbana concebida do zero como cofundadora, atuando diretamente no desenvolvimento do produto, pitch e validação de mercado.",
-    impact: "Conquista do 2º lugar em competição — onde aprendi a vender uma ideia tão bem quanto sei construí-la.",
+      "Solução de mobilidade urbana concebida do zero como cofundadora — produto, pitch e validação de mercado.",
+    impact: "2º lugar em competição — aprendi a vender uma ideia tão bem quanto sei construí-la.",
     technologies: ["Produto", "UX", "Empreendedorismo"],
   },
 ];
 
-const ProjectCard = ({ project }: { project: Project }) => {
-  const [hovered, setHovered] = useState(false);
+const ProjectItem = ({ project, index }: { project: Project; index: number }) => {
+  const [open, setOpen] = useState(false);
+  const num = String(index + 1).padStart(2, "0");
 
   return (
-    <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: "#fff",
-        borderRadius: "1.1rem",
-        padding: "1.25rem",
-        border: "1.5px solid rgba(198,159,213,0.3)",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.65rem",
-        height: "100%",
-        transition: "transform 0.2s, box-shadow 0.2s",
-        transform: hovered ? "translateY(-3px)" : "none",
-        boxShadow: hovered ? "0 10px 28px rgba(198,159,213,0.2)" : "none",
-      }}
-    >
-      {/* Título */}
-      <div
-        style={{
-          fontFamily: "'Playfair Display', serif",
-          fontStyle: "italic",
-          fontWeight: 700,
-          fontSize: "0.95rem",
-          color: "#1a1235",
-          lineHeight: 1.35,
-        }}
-      >
-        {project.title}
-      </div>
-
-      {/* Descrição — flex:1 empurra o bloco inferior para o fundo */}
-      <p
-        style={{
-          fontSize: "0.8rem",
-          color: "#6b5f7a",
-          lineHeight: 1.6,
-          flex: 1,
-        }}
-      >
-        {project.description}
-      </p>
-
-      {/* Bloco inferior: impacto + tags + links sempre alinhados */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-        {/* Impacto */}
-        <div
-          style={{
-            padding: "0.55rem 0.75rem",
-            background: "#f7f0fc",
-            borderLeft: "2.5px solid #c69fd5",
-            borderRadius: "0 0.5rem 0.5rem 0",
-            fontSize: "0.75rem",
-            color: "#6b5f7a",
-            lineHeight: 1.5,
-            fontFamily: "'Montserrat', sans-serif",
-          }}
-        >
-          ✦ {project.impact}
-        </div>
-
-        {/* Tags */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              style={{
-                padding: "0.18rem 0.55rem",
-                background: "#e4cff0",
-                borderRadius: "100px",
-                fontSize: "0.68rem",
-                fontWeight: 600,
-                color: "#1a1235",
-                fontFamily: "'Montserrat', sans-serif",
-              }}
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        {project.codeLinks && (
-          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-            {project.codeLinks.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.3rem",
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  color: "#9b6ab5",
-                  textDecoration: "none",
-                  border: "1.5px solid #c69fd5",
-                  borderRadius: "100px",
-                  padding: "0.25rem 0.65rem",
-                  transition: "all 0.2s",
-                  fontFamily: "'Montserrat', sans-serif",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "#9b6ab5";
-                  el.style.borderColor = "#9b6ab5";
-                  el.style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget;
-                  el.style.background = "transparent";
-                  el.style.borderColor = "#c69fd5";
-                  el.style.color = "#9b6ab5";
-                }}
-              >
-                <Github size={11} />
-                ⇗ {link.label}
-              </a>
+    <li className={`ps-item${open ? " open" : ""}`}>
+      <div className="ps-row" onClick={() => setOpen(!open)}>
+        <span className="ps-num">{num}</span>
+        <span className="ps-name">{project.title}</span>
+        <div className="ps-right">
+          <div className="ps-techs">
+            {project.technologies.slice(0, 2).map((t) => (
+              <span key={t} className="ps-tag">{t}</span>
             ))}
           </div>
-        )}
+          <span className="ps-arrow">{open ? "×" : "+"}</span>
+        </div>
       </div>
-    </article>
+
+      <div className="ps-expand">
+        <div className="ps-expand-inner">
+          <p className="ps-desc">{project.description}</p>
+          <div className="ps-impact">✦ {project.impact}</div>
+          {project.codeLinks && (
+            <div className="ps-links">
+              {project.codeLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ps-link"
+                >
+                  <Github size={11} />
+                  ⇗ {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </li>
   );
 };
 
 const ProjectsSection = () => {
   return (
-    <section id="projetos" style={{ padding: "5rem 2rem", background: "#fdfdc9" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <p
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#9b6ab5",
-            marginBottom: "0.5rem",
-          }}
-        >
-          Portfólio
-        </p>
-        <h2
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontStyle: "italic",
-            fontWeight: 700,
-            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-            marginBottom: "3rem",
-            color: "#1a1235",
-            lineHeight: 1.2,
-          }}
-        >
-          Projetos
-        </h2>
-
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
+    <section id="projetos" className="projects-section">
+      <div className="section-inner">
+        <div className="ps-header">
+          <div>
+            <span className="section-label">Portfólio</span>
+            <h2 className="section-title">Projetos</h2>
+          </div>
+          <span className="ps-count">0{projects.length} projetos</span>
         </div>
-      </div>
 
-      <style>{`
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.1rem;
-        }
-        @media (max-width: 800px) {
-          .projects-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 540px) {
-          .projects-grid { grid-template-columns: 1fr; }
-        }
-      `}</style>
+        <ul className="ps-list">
+          {projects.map((project, i) => (
+            <ProjectItem key={project.title} project={project} index={i} />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };
