@@ -13,7 +13,7 @@ const timelineItems: TimelineItem[] = [
     organization: "Empro — Estágio Atual",
     period: "2026 – Presente",
     description:
-      "Desenvolvimento e manutenção de sistemas internos, integração de APIs e colaboração com equipe de produto.",
+      "Atuação no desenvolvimento e manutenção de sistemas governamentais internos da Prefeitura Municipal e colaboração ativa com equipes de produto.",
   },
   {
     type: "experience",
@@ -51,7 +51,7 @@ const timelineItems: TimelineItem[] = [
     organization: "Etec Philadelpho Gouvêa Netto",
     period: "2021 – 2023",
     description:
-      "Ensino médio integrado ao técnico. TCC integrando HTML, Java, PHP e PhpMyAdmin.",
+      "Ensino médio integrado ao técnico. Foco em desenvolvimento de software, programação e banco de dados.",
   },
   {
     type: "project",
