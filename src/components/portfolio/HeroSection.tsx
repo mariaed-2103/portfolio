@@ -75,7 +75,6 @@ const HeroSection = () => {
           <br />
           <em style={{ color: "#9b6ab5" }}>Full Stack</em>
           <br />
-          com visão de produto
         </h1>
 
         <p
