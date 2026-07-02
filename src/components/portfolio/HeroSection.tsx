@@ -88,7 +88,7 @@ const HeroSection = () => {
             marginBottom: "2.5rem",
           }}
         >
-          Java · Spring Boot · React · WordPress
+          Java · Spring Boot · React 
         </p>
 
         <div
